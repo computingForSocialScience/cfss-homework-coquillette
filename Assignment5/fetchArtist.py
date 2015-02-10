@@ -13,8 +13,8 @@ def fetchArtistId(name):
     url = base_url + search_url + artist_name
     #print "artist url is ", url
     req = requests.get(url)
-    if not req.ok:
-    	print "Error in Request"
+    if req.ok == False: #if not req.ok
+    	print "Error in fetchArtistId Request"
     req.json()
     myjson = req.json()
     artist_info = myjson.get('artists')
@@ -37,8 +37,8 @@ def fetchArtistInfo(artist_id):
     url = base_url + str(artist_id)
     #print url
     req = requests.get(url)
-    if not req.ok:
-    	print "Error in Request"
+    if req.ok == False: #if not req.ok
+    	print "Error in fetchArtistInfo Request"
     req.json()
     myjson = req.json()
     get_genre = myjson.get('genres')

@@ -8,8 +8,8 @@ def fetchAlbumIds(artist_id):
     url = 'https://api.spotify.com/v1/artists/' + artist_id + '/albums?market=US&album_type=album'
     req = requests.get(url)
     #print url
-    if not req.ok:
-    	print "Error in Request"
+    if req.ok == False: #if not req.ok
+    	print "Error in fetchAlbumIds Request"
     req.json()
     myjson = req.json()
     get_items = myjson.get('items')
@@ -30,8 +30,8 @@ def fetchAlbumInfo(album_id):
     url = 'https://api.spotify.com/v1/albums/' + album_id
     req = requests.get(url)
     #print url
-    if not req.ok:
-    	print "Error in Request"
+    if req.ok == False: #if not req.ok
+    	print "Error in fetchAlbumInfo Request"
     req.json()
     myjson = req.json()
     artist_info = myjson.get('artists')

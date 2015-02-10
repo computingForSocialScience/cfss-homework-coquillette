@@ -48,7 +48,7 @@ def plotBarChart():
     ax.bar(x_vals, y_vals, width=10) #plots x and y values
     ax.set_xlabel('decades') #labels the x axis 'decades'
     ax.set_ylabel('number of albums') #labels the y axis 'number of albums'
-    ax.set_title('Totals for ' + ', '.join(artist_names)) #sets title as 'Totals for __', filling in the artist name from the artist_names list
+    ax.set_title('Totals for ' + ', '.join(artist_names)) #sets title as 'Totals for __', filling in the artist names from the artist_names list
     plt.show() #shows the bar chart
 
 
