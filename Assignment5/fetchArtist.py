@@ -11,7 +11,7 @@ def fetchArtistId(name):
     search_url = '/v1/search?q=' 
     artist_name = name + '&type=artist' 
     url = base_url + search_url + artist_name
-    #print url
+    #print "artist url is ", url
     req = requests.get(url)
     if not req.ok:
     	print "Error in Request"
@@ -32,10 +32,10 @@ def fetchArtistInfo(artist_id):
     'id', 'name', and 'popularity'.
     """
     base_url = 'https://api.spotify.com/v1/artists/'
-    artist_id = fetchArtistId(artist)
-    print artist_id
+    #artist_id = fetchArtistId(artist)
+    #print artist_id
     url = base_url + str(artist_id)
-    print url
+    #print url
     req = requests.get(url)
     if not req.ok:
     	print "Error in Request"
@@ -50,8 +50,8 @@ def fetchArtistInfo(artist_id):
     keys = ['followers', 'genres', 'id', 'name', 'popularity']
     values = [get_followers, get_genre, get_id, get_name, get_popularity]
     artist_dict = dict(zip(keys,values))
-    print artist_dict
+    return artist_dict
 
-artist = 'Bikini Kill'
-artist_id = fetchArtistId(artist)
-fetchArtistInfo(artist_id)
+#artist = 'Bikini Kill'
+#artist_id = fetchArtistId(artist)
+#fetchArtistInfo(artist_id)

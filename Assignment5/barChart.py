@@ -39,12 +39,11 @@ def getBarChartData():
 
     x_values = decades #x-values are equal to decades
     y_values = [decade_dict[d] for d in decades] #y-values are equal to counts of albums in the decades
-    return x_values, y_values, artist_names
+    return x_values, y_values, artist_names #returns x_values, y_values, and list of artist_names
 
 def plotBarChart():
     """Plots bar chart using x_vals, y_vals, and artist_names generated in getBarChartData function"""
     x_vals, y_vals, artist_names = getBarChartData() #pulls x and y values and artists names list from previously defined function
-    
     fig , ax = plt.subplots(1,1) #creates a figure with one subplot
     ax.bar(x_vals, y_vals, width=10) #plots x and y values
     ax.set_xlabel('decades') #labels the x axis 'decades'

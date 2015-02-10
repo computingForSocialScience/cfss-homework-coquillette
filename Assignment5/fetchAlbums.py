@@ -20,8 +20,8 @@ def fetchAlbumIds(artist_id):
     	album_id_list.append(get_id)
     return album_id_list
 
-artist_id = '6olE6TJLqED3rqDCT0FyPh'
-fetchAlbumIds(artist_id)
+#artist_id = '6olE6TJLqED3rqDCT0FyPh'
+#fetchAlbumIds(artist_id)
 
 def fetchAlbumInfo(album_id):
     """Using the Spotify API, take an album ID 
@@ -29,7 +29,7 @@ def fetchAlbumInfo(album_id):
     """
     url = 'https://api.spotify.com/v1/albums/' + album_id
     req = requests.get(url)
-    print url
+    #print url
     if not req.ok:
     	print "Error in Request"
     req.json()
@@ -44,7 +44,7 @@ def fetchAlbumInfo(album_id):
     keys = ['artist_id', 'album_id', 'name', 'year', 'popularity']
     values = [get_artist_id, get_album_id, get_name, get_year, get_popularity]
     album_dict = dict(zip(keys,values))
-    print album_dict
+    return album_dict
     
-album_id = '14VVqBoDw1SxoNLW3Cj3mN'
-fetchAlbumInfo(album_id)
+#album_id = '14VVqBoDw1SxoNLW3Cj3mN'
+#fetchAlbumInfo(album_id)
