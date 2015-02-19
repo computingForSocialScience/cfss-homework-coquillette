@@ -1,1 +1,52 @@
-For my final project, I will be conducting a Twitter content analysis in conjunction with my MA thesis. My thesis is on the #NotBuyingIt Twitter campaign, in which users post pictures of sexist or misogynistic products and call for a boycott of the retailer. The campaign has been remarkably successful at getting retailers to apologize and pull the targeted product. For my thesis, I am conducting a larger content analysis of Twitter data in order to determine the constitutive elements of successful #NotBuyingIt efforts. For this project, I want to undertake a content analysis of three targeted #NotBuyingIt efforts, one in which the targeted company apologized and pulled the product (Veet), one in which the company took no action (Code Babes), and one in which the company initially apologized and pulled the product but then reinstated the product at a later time (LaPerla). I hope to use this smaller case study as a pilot test for my larger thesis project and to further develop my facility with the Twitter REST API and content analysis skills that will serve me well in the future!
+WHAT:  For my final project, I will be conducting a Twitter content
+analysis in conjunction with my MA thesis. My thesis is on the
+#NotBuyingIt Twitter campaign, in which users post pictures of sexist or 
+misogynistic products and call for a boycott of the retailer. The campaign 
+has been remarkably successful at getting retailers to apologize and pull 
+the targeted product. For my thesis, I am conducting a larger content 
+analysis of Twitter data in order to determine the constitutive elements 
+of successful #NotBuyingIt efforts. For this project, I want to undertake 
+a content analysis of three specific #NotBuyingIt efforts, one in which 
+the targeted company apologized and pulled the product (Veet), one in 
+which the company took no action (Code Babes), and one in which the 
+company initially apologized and pulled the product but then reinstated 
+the product at a later time (LaPerla). I hope to use this smaller case 
+study as a pilot test for my larger thesis project and to further develop 
+my facility with the Twitter REST API and content analysis skills that 
+will serve me well for the thesis.
+
+WHY:  There has been a great deal of scholarship on how online activism
+departs from models of traditional activism. However, with the exception 
+of very few studies (ex. Karpf, 2010; Potts et al., 2014), little work has 
+been done to define "success" in online activism. #NotBuyingIt is a 
+productive case study because "success" can be operationalized in terms of 
+the response from the corporation, rather than a more nebulous measure 
+like "awareness" of a certain cause. Conducting this content analysis 
+enables me to better understand the constitutive elements of success for 
+this case, with an ultimate goal of being able to predict the success of 
+ongoing #NotBuyingIt efforts based on their similarities with previous 
+campaigns.
+
+HOW:  I plan to code functions to measure several different aspects of the 
+three planned Twitter corpuses, which I will then compare. I plan to use 
+the Twitter REST API to pull these corpuses. I am still determining 
+precisely which analyses I will run on my data, but from the outset plan:
+
+* A measure of word frequency within each of the corpuses (using stopwords 
+to eliminate grammatical forms). Previous research indicates that online 
+activist efforts generate more engagement (operationalized on social media 
+as likes and retweets) when their content uses inclusive language such as 
+"we", "us", "our" and when their content contains certain activist-
+specific terminology ("protest", "petition", "rally", "activist") (Potts 
+et al., 2014). 
+
+* A valuecount for 'imgur', 'bit.ly', or 'http' strings in the tweet corpus.
+I hypothesize that tweets that contain a photo or a link to the product will 
+be more effective at generating retweets and posts from other users and thus 
+will be correlated with overall success of the movement.
+
+* A list containing tuples of usernames, number of tweets from that user in 
+the corpus, and the user's number of followers.
+
+* A histogram of times of day/days of the week that tweets in each corpus are 
+posted.
