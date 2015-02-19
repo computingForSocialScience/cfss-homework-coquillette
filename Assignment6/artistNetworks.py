@@ -24,6 +24,7 @@ def getRelatedArtists(artistID):
 
 def getDepthEdges(artistID, depth):
 	tuple_artist_list = []
+	tuple_artist_list_check = []
 	related_ids = []
 	related_ids.append(artistID)
 	for i in range(depth):
@@ -32,11 +33,15 @@ def getDepthEdges(artistID, depth):
 			for artist in depth_artist_list:
 				tupl = (ids, artist)
 				tuple_artist_list.append(tupl)
-			related_ids = depth_artist_list
-	remove_duplicates_list = tuple_artist_list
+		related_ids = depth_artist_list
+	for tupl in tuple_artist_list:
+		if tupl not in tuple_artist_list_check:
+			tuple_artist_list_check.append(tupl)
+	return tuple_artist_list_check
+	#remove_duplicates_list = tuple_artist_list
 	#set(remove_duplicates_list)
-	list(set(remove_duplicates_list))
-	return(remove_duplicates_list)
+	#list(set(remove_duplicates_list))
+	#return(remove_duplicates_list)
 
 	"""x = depth_artist_list
 	remove_duplicates_list = list(set(itertools.combinations(x, depth)))
@@ -49,11 +54,11 @@ def getDepthEdges(artistID, depth):
 
 def getEdgeList(artistID, depth):
 	depthEdges = getDepthEdges(artistID, depth)
-	lib_short_df = pd.DataFrame(depthEdges)
-	return lib_short_df
+	edge_list_df = pd.DataFrame(depthEdges)
+	return edge_list_df
 
 def writeEdgeList(artistID, depth, filename):
 	save_edgeList = getEdgeList(artistID, depth)
-	saved_csv_file = save_edgeList.to_csv(filename, index = False)
+	saved_csv_file = save_edgeList.to_csv(filename, index = False, header = ['artist', 'related_artist'])
 
 #writeEdgeList('6olE6TJLqED3rqDCT0FyPh', 2, 'edgelist.csv')
