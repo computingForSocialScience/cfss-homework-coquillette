@@ -73,7 +73,10 @@ def createnewPlaylist(artistName):
     #playlist = """INSERT INTO playlists (id);"""
     #cur.execute(playlist)
     #db.commit()?
-    playlistID = cur.lastrowid
+    get_id_number = """SELECT MAX(id) from playlists;"""
+    cur.execute(get_id_number)
+    playlist_id = cur.fetchall()
+    playlistID = playlist_id[0][0]
     artist_name_in = """INSERT INTO playlists (rootArtist) VALUES ('%s')""" % (artistName)
     cur.execute(artist_name_in)
     #playlistID = cur.lastrowid
@@ -92,11 +95,10 @@ def createnewPlaylist(artistName):
         db.commit()
 
     cur.close()
-    db.close()
 
-createnewPlaylist("Nirvana")
+#createnewPlaylist("Sting")
 
-"""@app.route('/')
+@app.route('/')
 def make_index_resp():
     # this function just renders templates/index.html when
     # someone goes to http://127.0.0.1:5000/
@@ -105,11 +107,20 @@ def make_index_resp():
 
 @app.route('/playlists/')
 def make_playlists_resp():
+    cur = db.cursor()
+    get_playlists = """SELECT * FROM playlists;"""
+    cur.execute(get_playlists)
+    playlists = cur.fetchall()
     return render_template('playlists.html',playlists=playlists)
 
 
 @app.route('/playlist/<playlistId>')
 def make_playlist_resp(playlistId):
+    cur = db.cursor()
+    input_playlist = playlistId
+    song_request = """SELECT songOrder, artistName, albumName, trackName FROM songs WHERE playlistId = (%s)""" % (input_playlist)
+    cur.execute(song_request)
+    songs = cur.fetchall()
     return render_template('playlist.html',songs=songs)
 
 
@@ -121,11 +132,11 @@ def add_playlist():
     elif request.method == 'POST':
         # this code executes when someone fills out the form
         artistName = request.form['artistName']
-        # YOUR CODE HERE
+        createnewPlaylist(artistName)
         return(redirect("/playlists/"))
 
 
 
 if __name__ == '__main__':
     app.debug=True
-    app.run()"""
+    app.run()
