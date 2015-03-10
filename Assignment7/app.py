@@ -20,26 +20,28 @@ user="root"
 passwd="AN1ceSl1ceofPy"
 db=pymysql.connect(db=dbname, host=host, user=user,passwd=passwd, charset='utf8')
 
-def createnewPlaylist(artistName):
+def createNewPlaylist(ArtistName):
     cur = db.cursor()
-    maketableplaylists = """CREATE TABLE IF NOT EXISTS playlists (id INTEGER PRIMARY KEY AUTO_INCREMENT, rootArtist VARCHAR(255));""" 
-    maketablesongs = """CREATE TABLE IF NOT EXISTS songs (playlistId INTEGER, songOrder INTEGER, artistName VARCHAR(255), albumName VARCHAR(255), trackName VARCHAR(255));"""
-    cur.execute(maketableplaylists)
-    cur.execute(maketablesongs)
-    #db.commit()
+    make_table_playlists = '''CREATE TABLE IF NOT EXISTS playlists (id INTEGER PRIMARY KEY AUTO_INCREMENT, rootArtist VARCHAR(128));'''
+    make_table_songs = '''CREATE TABLE IF NOT EXISTS songs (playlistId INTEGER, songOrder INTEGER, artistName VARCHAR(128), albumName VARCHAR(256), trackName VARCHAR(256));'''
+    cur.execute(make_table_playlists)
+    cur.execute(make_table_songs)
 
-    artist_names = artistName
-    depth = 2 #change depth at will
-
-    artists_id = fetchArtistId(artistName)
+    depth = 2
+    artists_id = fetchArtistId(ArtistName)
     edge_list = getEdgeList(artists_id,depth)
-
     g = pandasToNetworkX(edge_list)
-
     random_artists = []
-    for i in range(30):
+    
+    limit = 30
+    while limit > 0:
         random_artist = randomCentralNode(g)
-        random_artists.append(random_artist)
+        album_id_list = fetchAlbumIds(random_artist)
+        if album_id_list == []:
+            pass
+        else:
+            random_artists.append(random_artist)
+            limit = limit -1
 
     artist_names = []
     album_list = []
@@ -70,33 +72,29 @@ def createnewPlaylist(artistName):
             random_track = (random.choice(track_list))
         random_track_list.append(random_track)
 
-    #playlist = """INSERT INTO playlists (id);"""
-    #cur.execute(playlist)
-    #db.commit()?
-    get_id_number = """SELECT MAX(id) from playlists;"""
-    cur.execute(get_id_number)
-    playlist_id = cur.fetchall()
-    playlistID = playlist_id[0][0]
-    artist_name_in = """INSERT INTO playlists (rootArtist) VALUES ('%s')""" % (artistName)
+    artist_name_in = """INSERT INTO playlists (rootArtist) VALUES ('%s')""" % (ArtistName)
+    #playlistId = cur.lastrowid
     cur.execute(artist_name_in)
-    #playlistID = cur.lastrowid
-    #db.commit()
+    com_play = """SELECT MAX(id) FROM playlists;"""
+    cur.execute(com_play)
+    playlistId = cur.fetchall()
+    playlistId = playlistId[0][0]
     for i in range(len(random_track_list)):
+        songOrder = i+1
         Artist_Name = '"' + artist_names[i] + '"'
         Artist_Name.replace('\'', "")
         Album_Name = '"' + album_list[i][0] + '"'
         Album_Name.replace('\'', "")
         Track_Name = '"' + random_track_list[i] + '"'
         Track_Name.replace('\'', "")
-        songOrder = i+1
-        sql = """INSERT INTO songs (playlistId, songOrder, artistName, albumName, trackName) 
-        VALUES (%s, %s, %s, %s, %s)""" % (playlistID, songOrder, Artist_Name, Album_Name, Track_Name)
+        sql = """INSERT INTO songs (playlistId, songOrder, artistName, albumName, trackName) VALUES (%s, %s, %s, %s, %s)""" % (playlistId, songOrder, Artist_Name, Album_Name, Track_Name)
         cur.execute(sql)
         db.commit()
-
+        
     cur.close()
 
-#createnewPlaylist("Sting")
+#createNewPlaylist("Nirvana")
+
 
 @app.route('/')
 def make_index_resp():
@@ -118,7 +116,7 @@ def make_playlists_resp():
 def make_playlist_resp(playlistId):
     cur = db.cursor()
     input_playlist = playlistId
-    song_request = """SELECT songOrder, artistName, albumName, trackName FROM songs WHERE playlistId = (%s)""" % (input_playlist)
+    song_request = """SELECT songOrder, artistName, albumName,trackName FROM songs WHERE playlistId = (%s)""" % (input_playlist)
     cur.execute(song_request)
     songs = cur.fetchall()
     return render_template('playlist.html',songs=songs)
@@ -132,11 +130,14 @@ def add_playlist():
     elif request.method == 'POST':
         # this code executes when someone fills out the form
         artistName = request.form['artistName']
-        createnewPlaylist(artistName)
+        createNewPlaylist(artistName)
         return(redirect("/playlists/"))
-
 
 
 if __name__ == '__main__':
     app.debug=True
     app.run()
+
+
+
+
