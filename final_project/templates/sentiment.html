@@ -1,0 +1,21 @@
+<html>
+ <head>
+ <h1>Sentiment Analysis</h1>
+<ul>
+</head>
+<body>
+ <table>
+ <tr>
+ <th>Tweet Text</th>
+ <th>Sentiment</th>
+ </tr>
+ {% for tweet_text,sentiment in sentiment %}
+ <tr>
+ <td>{{ tweet_text }}</td>
+ <td>{{ sentiment }}</td>
+ </tr>
+ {% endfor %}
+ </table>
+</ul>
+</body>
+</html>

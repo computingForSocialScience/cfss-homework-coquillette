@@ -1,0 +1,35 @@
+<html>
+<head>
+ <h1>Tweets</h1>
+</head>
+<body>
+<li><a href="/sentiment/">View Tweet Sentiment</a></li> 
+<li><a href="/datehistogram/">View Date Histogram</a></li>
+<li><a href="/wordcloud/">View Twitter Wordcloud</a></li>
+<li><a href="/nltk/">View Natural Language Toolkit</a></li>
+ <table>
+ <tr>
+ <th>Tweet Text</th>
+ <th>Tweet Created At</th>
+ <th>Retweeted?</th>
+ <th>Favorited?</th>
+ <th>Tweet ID</th>
+ <th>Hashtags</th>
+ <th>User Mentions</th>
+ <th>URLs</th>
+ </tr>
+ {% for tweet,created,retweeted,favorited,tweetID,hashtags,userMentions,urls in tweets %}
+ <tr>
+ <td>{{ tweet }}</td>
+ <td>{{ created }}</td>
+ <td>{{ retweeted }}</td>>
+ <td>{{ favorited }}</td>
+ <td>{{ tweetID }}</td>
+ <td>{{ hashtags }}</td>
+ <td>{{ userMentions }}</td>>
+ <td>{{ urls }}</td>
+ </tr>
+ {% endfor %}
+ </table>
+</body>
+</html>    

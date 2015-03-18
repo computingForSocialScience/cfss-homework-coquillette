@@ -1,0 +1,21 @@
+<html>
+ <head>
+ <h1>Frequency of Link Terms</h1>
+<ul>
+</head>
+<body>
+ <table>
+ <tr>
+ <th>Term</th>
+ <th>Frequency</th>
+ </tr>
+ {% for term,frequency in nltkdb %}
+ <tr>
+ <td>{{ term }}</td>
+ <td>{{ frequency }}</td>
+ </tr>
+ {% endfor %}
+ </table>
+</ul>
+</body>
+</html>

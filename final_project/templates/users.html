@@ -1,0 +1,30 @@
+<html>
+ <head>
+ <h1>Users</h1>
+<ul>
+</head>
+<body>
+<li><a href="/powerusers/">View Power Users</a></li>
+<li><a href="/prolificusers/">View Prolific Users</a></li>
+<li><a href="/followershistogram/">Plot Tweets vs. Followers Histogram</a></li>
+ <table>
+ <tr>
+ <th>Username</th>
+ <th>Number of Followers</th>
+ <th>Number of Statuses</th>
+ <th>Friends Count</th>
+ <th>Location</th>
+ </tr>
+ {% for name,followers,statuses,friendsCount,location in users %}
+ <tr>
+ <td>{{ name }}</td>
+ <td>{{ followers }}</td>
+ <td>{{ statuses }}</td>>
+ <td>{{ friendsCount }}</td>
+ <td>{{ location }}</td>
+ </tr>
+ {% endfor %}
+ </table>
+</ul>
+</body>
+</html>    
